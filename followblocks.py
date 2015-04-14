@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 
-from counterpartyd.lib import blocks
+from darkpoold.lib import blocks
 from helpers import set_options, init_logging, connect_to_db
 
 

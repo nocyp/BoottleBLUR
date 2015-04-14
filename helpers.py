@@ -5,7 +5,7 @@ import configparser
 import appdirs
 import decimal
 import apsw
-from counterpartyd.lib import config, util, bitcoin
+from darkpoold.lib import config, util, bitcoin
 
 
 def D(num):
@@ -23,14 +23,14 @@ def set_options (data_dir=None, bitcoind_rpc_connect=None, bitcoind_rpc_port=Non
         raise Exception # TODO
 
     if not data_dir:
-        config.DATA_DIR = appdirs.user_data_dir(appauthor='Counterparty', appname='counterpartyd', roaming=True)
+        config.DATA_DIR = appdirs.user_data_dir(appauthor='Darkpoold', appname='darkpoold', roaming=True)
     else:
         config.DATA_DIR = data_dir
     if not os.path.isdir(config.DATA_DIR): os.mkdir(config.DATA_DIR)
 
     # Configuration file
     configfile = configparser.ConfigParser()
-    config_path = os.path.join(config.DATA_DIR, 'counterpartyd.conf')
+    config_path = os.path.join(config.DATA_DIR, 'darkpoold.conf')
     configfile.read(config_path)
     has_config = 'Default' in configfile
     #logging.debug("Config file: %s; Exists: %s" % (config_path, "Yes" if has_config else "No"))
@@ -122,13 +122,13 @@ def set_options (data_dir=None, bitcoind_rpc_connect=None, bitcoind_rpc_port=Non
     if database_file:
         config.DATABASE = database_file
     else:
-        config.DB_VERSION_MAJOR
-        config.DATABASE = os.path.join(config.DATA_DIR, 'counterpartyd.' + str(config.DB_VERSION_MAJOR) + '.db')
+        config.VERSION_MAJOR
+        config.DATABASE = os.path.join(config.DATA_DIR, 'darkpoold.' + str(config.VERSION_MAJOR) + '.db')
 
-    config.ADDRESSVERSION = b'\x00'
-    config.BLOCK_FIRST = 278270
-    config.BURN_START = 278310
-    config.BURN_END = 283810
+    config.ADDRESSVERSION = b'\x1b'
+    config.BLOCK_FIRST = 17000
+    config.BURN_START = 17000
+    config.BURN_END = config.BURN_START + 30*24*60
     config.UNSPENDABLE = '1CounterpartyXXXXXXXXXXXXXXXUWLpVr'
             
 
@@ -147,7 +147,7 @@ def check_config():
     ok = ok and config.BITCOIND_RPC_CONNECT!=''
     ok = ok and config.BITCOIND_RPC_PORT!=''
     ok = ok and config.BITCOIND_RPC_USER!=''
-    ok = ok and config.BITCOIND_RPC_PASSWORD!=''
+    #ok = ok and config.BITCOIND_RPC_PASSWORD!=''
     return ok
 
 

@@ -86,6 +86,7 @@ class ConfigDialog(Toplevel):
 
     def ok(self, event=None):       
         try:
+            print(self.configpath)
             for key in self.config_vars:
                 self.configfile[self.configsection][key] = self.config_vars[key].get().strip()
 
