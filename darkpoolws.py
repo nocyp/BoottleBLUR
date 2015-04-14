@@ -53,9 +53,9 @@ def wallet():
             assets =  {}
             empty = True
             if btc_balance:
-                assets['BTC'] = btc_balance
-                if 'BTC' in totals.keys(): totals['BTC'] += btc_balance
-                else: totals['BTC'] = btc_balance
+                assets['CRAVE'] = btc_balance
+                if 'CRAVE' in totals.keys(): totals['CRAVE'] += btc_balance
+                else: totals['CRAVE'] = btc_balance
                 empty = False
             for balance in balances:
                 asset = balance['asset']
@@ -114,13 +114,13 @@ def counterparty_action():
                 raise Exception('Invalid expiration')
 
             # Fee argument is either fee_required or fee_provided, as necessary.
-            if give_asset == 'BTC':
+            if give_asset == 'CRAVE':
                 fee_required = 0
                 fee_fraction_provided = util.devise(db, fee_fraction_provided, 'fraction', 'input')
                 fee_provided = round(D(fee_fraction_provided) * D(give_quantity) * D(config.UNIT))
                 if fee_provided < config.MIN_FEE:
                     raise Exception('Fee provided less than minimum necessary for acceptance in a block.')
-            elif get_asset == 'BTC':
+            elif get_asset == 'CRAVE':
                 fee_provided = config.MIN_FEE
                 fee_fraction_required = util.devise(db, fee_fraction_required, 'fraction', 'input')
                 fee_required = round(D(fee_fraction_required) * D(get_quantity) * D(config.UNIT))
