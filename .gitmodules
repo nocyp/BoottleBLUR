@@ -1,6 +1,6 @@
 [submodule "counterpartygui"]
 	path = counterpartygui
-	url = https://github.com/JahPowerBit/counterpartygui
-[submodule "counterpartyd"]
-	path = counterpartyd
-	url = https://github.com/PhantomPhreak/counterpartyd.git
+	url = https://github.com/nocyp/counterpartygui-old.git
+[submodule "darkpoold"]
+	path = darkpoold
+	url = https://github.com/nocyp/darkpoold.git
